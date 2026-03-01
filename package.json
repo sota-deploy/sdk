@@ -1,0 +1,39 @@
+{
+  "name": "@sota-io/sdk",
+  "version": "1.0.0",
+  "description": "TypeScript SDK for the sota.io deployment platform API",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sota-deploy/sdk"
+  },
+  "homepage": "https://sota.io/docs/api",
+  "keywords": [
+    "sota",
+    "sdk",
+    "deploy",
+    "paas",
+    "typescript",
+    "api-client"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "@types/node": "^22.0.0"
+  }
+}
