@@ -3,7 +3,8 @@
 TypeScript SDK for the [sota.io](https://sota.io) deployment platform.
 Deploy web apps, manage projects, and control deployments programmatically.
 
-[![npm](https://img.shields.io/npm/v/@sota-io/sdk)](https://www.npmjs.com/package/@sota-io/sdk)
+[![npm version](https://img.shields.io/npm/v/@sota-io/sdk)](https://www.npmjs.com/package/@sota-io/sdk)
+[![npm downloads](https://img.shields.io/npm/dm/@sota-io/sdk)](https://www.npmjs.com/package/@sota-io/sdk)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ## Installation
