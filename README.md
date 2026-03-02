@@ -310,6 +310,9 @@ import type {
 | `DataResponse<T>` | API envelope for single items |
 | `ListResponse<T>` | API envelope for lists with pagination |
 | `APIErrorBody` | API error response body |
+| `Domain` | A custom domain with status, DNS verification, SSL state |
+| `DNSInstructions` | DNS record instructions (type, name, value) |
+| `DomainResponse` | Domain with optional DNS instructions |
 
 ## Requirements
 
