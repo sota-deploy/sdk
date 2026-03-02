@@ -1,6 +1,6 @@
 {
   "name": "@sota-io/sdk",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "TypeScript SDK for the sota.io deployment platform API",
   "type": "module",
   "main": "dist/index.js",

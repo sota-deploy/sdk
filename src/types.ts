@@ -52,6 +52,37 @@ export interface EnvVar {
   updated_at: string;
 }
 
+/** A custom domain attached to a project. */
+export interface Domain {
+  id: string;
+  project_id: string;
+  user_id: string;
+  domain: string;
+  status: string;
+  dns_type: string;
+  last_checked_at?: string;
+  verified_at?: string;
+  error_message?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+/** DNS record instructions for pointing a custom domain. */
+export interface DNSInstructions {
+  /** Record type: "A" for apex domains, "CNAME" for subdomains. */
+  type: string;
+  /** Record name: "@" for apex, or subdomain prefix (e.g., "app"). */
+  name: string;
+  /** Record value: IP address for A records, or "{slug}.sota.io" for CNAME. */
+  value: string;
+}
+
+/** A domain with DNS setup instructions (returned by addDomain and getDomain). */
+export interface DomainResponse {
+  domain: Domain;
+  dns_instructions?: DNSInstructions;
+}
+
 // ---------------------------------------------------------------------------
 // API response envelopes
 // ---------------------------------------------------------------------------

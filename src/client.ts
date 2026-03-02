@@ -15,6 +15,8 @@ import type {
   Project,
   Deployment,
   EnvVar,
+  Domain,
+  DomainResponse,
   DataResponse,
   ListResponse,
   APIErrorBody,
@@ -378,5 +380,76 @@ export class SotaClient {
         errorBody?.error?.message ?? response.statusText,
       );
     }
+  }
+
+  // -------------------------------------------------------------------------
+  // Custom Domains
+  // -------------------------------------------------------------------------
+
+  /**
+   * List all custom domains for a project.
+   *
+   * @param projectId - The project UUID.
+   * @returns An array of domains.
+   */
+  async listDomains(projectId: string): Promise<Domain[]> {
+    const resp = await this.request<DataResponse<Domain[]>>(
+      'GET',
+      `/v1/projects/${projectId}/domains`,
+    );
+    return resp.data;
+  }
+
+  /**
+   * Add a custom domain to a project.
+   *
+   * Returns the created domain along with DNS instructions (record type,
+   * name, and value) that must be configured at the domain registrar.
+   *
+   * @param projectId - The project UUID.
+   * @param domain - The domain name to add (e.g., "app.example.com").
+   * @returns The domain with DNS setup instructions.
+   */
+  async addDomain(
+    projectId: string,
+    domain: string,
+  ): Promise<DomainResponse> {
+    const resp = await this.request<DataResponse<DomainResponse>>(
+      'POST',
+      `/v1/projects/${projectId}/domains`,
+      { domain },
+    );
+    return resp.data;
+  }
+
+  /**
+   * Get a custom domain by ID with DNS instructions.
+   *
+   * @param projectId - The project UUID.
+   * @param domainId - The domain UUID.
+   * @returns The domain details with DNS setup instructions.
+   */
+  async getDomain(
+    projectId: string,
+    domainId: string,
+  ): Promise<DomainResponse> {
+    const resp = await this.request<DataResponse<DomainResponse>>(
+      'GET',
+      `/v1/projects/${projectId}/domains/${domainId}`,
+    );
+    return resp.data;
+  }
+
+  /**
+   * Remove a custom domain from a project.
+   *
+   * @param projectId - The project UUID.
+   * @param domainId - The domain UUID.
+   */
+  async removeDomain(projectId: string, domainId: string): Promise<void> {
+    await this.request(
+      'DELETE',
+      `/v1/projects/${projectId}/domains/${domainId}`,
+    );
   }
 }
