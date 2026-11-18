@@ -1,5 +1,9 @@
 name: Publish to npm
 
+# Trusted publishing (OIDC): npm accepts this workflow of this repository as
+# the publisher of the package. No npm token is stored anywhere. Configure it
+# on npmjs.com: package -> Settings -> Trusted Publisher -> GitHub Actions,
+# organization sota-deploy, repository sdk, workflow publish.yml.
 on:
   push:
     tags:
@@ -7,6 +11,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 jobs:
   publish:
@@ -16,11 +21,13 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           registry-url: https://registry.npmjs.org
 
+      # Trusted publishing needs npm 11.5.1 or later.
+      - run: npm install -g npm@latest
       - run: npm ci
       - run: npm run build
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Tag must match package.json
+        run: test "v$(node -p "require('./package.json').version")" = "$GITHUB_REF_NAME"
+      - run: npm publish --access public
