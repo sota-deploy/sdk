@@ -24,6 +24,10 @@ export interface Project {
   user_id: string;
   name: string;
   slug: string;
+  /** Optional git repository URL the project is associated with. Informational in v1. */
+  git_url?: string | null;
+  /** Optional git branch name (free-form; conventional default is `main`). Null when no branch was specified. */
+  git_branch?: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -122,6 +126,10 @@ export interface CreateProjectOptions {
   name: string;
   /** URL-safe slug (auto-generated from name if omitted). */
   slug?: string;
+  /** Optional git repository URL to associate with the project (informational). */
+  git_url?: string;
+  /** Optional branch name (only meaningful when `git_url` is set). */
+  git_branch?: string;
 }
 
 /** Options for setting an environment variable. */
